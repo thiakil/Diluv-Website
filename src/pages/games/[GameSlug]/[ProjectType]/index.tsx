@@ -232,7 +232,7 @@ export default function Projects({ theme, search, gameSlug, projectData, types, 
                 </div>
 
 
-                <div id={`projects`}>
+                <div id={`projects`} className="grid __grid-cols-3 gap-4 my-6">
                     {projects.map(value => {
                         return <ProjectCard gameSlug={gameSlug} projectTypeSlug={projectData.slug} project={value} key={value.slug}
                                             tagFilter={tagFilter} setTagFilter={updateTags}/>;

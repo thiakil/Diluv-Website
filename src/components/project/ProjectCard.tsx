@@ -50,84 +50,88 @@ function ProjectCard({ gameSlug, projectTypeSlug, project, tagFilter, setTagFilt
     let projectUrlRef = `/games/[GameSlug]/[ProjectType]/[ProjectSlug]`;
     let projectUrl = `/games/${gameSlug}/${projectTypeSlug}/${project.slug}`;
     return <>
-        <div className={`grid my-4 w-full mx-auto col-gap-2 row-gap-1 projectCardSmall sm:projectCardMedium lg:projectCardLarge`}>
-            <div className={`area-image`}>
-                <Link href={projectUrlRef} as={projectUrl}>
-                    <a>
-                        <img src={project.logo} className={`w-32 sm:h-48 sm:w-48 lg:h-32 lg:w-32`}/>
-                    </a>
-                </Link>
-            </div>
-
-            <div className={"sm:ml-2 leading-snug area-header"}>
-                <Link href={projectUrlRef} as={projectUrl}>
-                    <a>
-                        <div className={`inline-flex`}>
-                            <h4 className={`font-semibold`}>{project.name}</h4>
-                        </div>
-                    </a>
-                </Link>
-                <div className={`text-gray-600 dark:text-dark-400`}>
-                        <span>
-                            {`by `}
-                        </span>
-                    {listContributors(project)}
-                </div>
-            </div>
-
-            <div className={"sm:ml-2 my-auto area-summary"}>
-                <div className={`inline-flex`}>
-                    <p> {project.summary}</p>
-                </div>
-            </div>
-
-            <div className={`sm:ml-2 my-auto text-center mr-2 area-downloads`}>
-                <div className={`flex cursor-default`}>
-                    <Tippy content={getDownloadsTip(project.downloads)} followCursor={true} plugins={[followCursor]} duration={0} hideOnClick={false}>
-
-                        <div className={`inline-flex`}>
-                            <ChartBar className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
-                            <span className={`mr-1`}>
-                                {project.downloads}
+        <div className="overflow-hidden shadow-lg bg-white dark:bg-dark-800 flex">
+            <Link href={projectUrlRef} as={projectUrl}>
+                <a className="flex-none">
+                    <img src={project.logo} className={`w-full`}/>
+                </a>
+            </Link>
+            <div className="px-6 py-4 flex-grow">
+                <div className="mb-2 flex">
+                    <div className={`flex-grow`}>
+                        <Link href={projectUrlRef} as={projectUrl}>
+                            <a>
+                                <span className="font-bold text-xl">{project.name}</span>
+                            </a>
+                        </Link>
+                        <div className={`text-gray-600 dark:text-dark-400`}>
+                            <span>
+                                {`by `}
                             </span>
+                            {listContributors(project)}
                         </div>
-
-                    </Tippy>
-                </div>
-            </div>
-
-            <div className={`sm:ml-2 lg:ml-0 my-auto text-center mr-2 area-created`}>
-
-                <div className={`flex cursor-default`}>
-                    <Tippy content={getCreatedTip(project.createdAt)} followCursor={true} plugins={[followCursor]} duration={0} hideOnClick={false}>
-                        <div className={`inline-flex`}>
-                            <HourGlass className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
-                            <span className={``}>
-                                {formatDistance(project.createdAt, new Date(), { addSuffix: true })}
-                            </span>
-                        </div>
-                    </Tippy>
+                    </div>
+                    <div className="flex-none">
+                        {project.tags.map((value, i) => <div
+                            className={`ml-2 inline-block`} key={value.slug}>
+                            <FilterTag tagSlug={value.slug} tagName={value.name} tagFilter={tagFilter}
+                                       setTagFilter={setTagFilter}/></div>)}
+                    </div>
                 </div>
 
-            </div>
-            <div className={`sm:ml-2 my-auto text-center mr-2 area-updated`}>
+                <p className="mb-2"> {project.summary}</p>
 
-                <div className={`flex cursor-default`}>
-                    <Tippy content={getUpdatedTip(project.updatedAt)} followCursor={true} plugins={[followCursor]} duration={0} hideOnClick={false}>
-                        <div className={`inline-flex`}>
-                            <Time className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
-                            <span className={``}>
-                                {formatDistance(project.updatedAt, new Date(), { addSuffix: true })}
-                            </span>
+                <div className="grid grid-cols-3 gap-4">
+                    <div className={``}>
+                        <div className={`flex cursor-default`}>
+                            <Tippy content={getDownloadsTip(project.downloads)} followCursor={true} plugins={[followCursor]} duration={0}
+                                   hideOnClick={false}>
+
+                                <div className={`inline-flex`}>
+                                    <ChartBar className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
+                                    <span className={`mr-1`}>
+                                        {project.downloads}
+                                    </span>
+                                </div>
+
+                            </Tippy>
                         </div>
-                    </Tippy>
+                    </div>
+
+                    <div className={``}>
+
+                        <div className={`flex cursor-default`}>
+                            <Tippy content={getCreatedTip(project.createdAt)} followCursor={true} plugins={[followCursor]} duration={0}
+                                   hideOnClick={false}>
+                                <div className={`inline-flex`}>
+                                    <HourGlass className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
+                                    <span className={``}>
+                                        {formatDistance(project.createdAt, new Date(), { addSuffix: true })}
+                                    </span>
+                                </div>
+                            </Tippy>
+                        </div>
+
+                    </div>
+                    <div className={``}>
+
+                        <div className={`flex cursor-default`}>
+                            <Tippy content={getUpdatedTip(project.updatedAt)} followCursor={true} plugins={[followCursor]} duration={0}
+                                   hideOnClick={false}>
+                                <div className={`inline-flex`}>
+                                    <Time className={`fill-current mr-1 my-auto`} width={`1rem`} height={`1rem`}/>
+                                    <span className={``}>
+                                        {formatDistance(project.updatedAt, new Date(), { addSuffix: true })}
+                                    </span>
+                                </div>
+                            </Tippy>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
-
-            {project.tags.map((value, i) => <div className={`sm:ml-2 lg:ml-0 my-auto cursor-default text-center ${getTagArea(i)}`} key={value.slug}>
-                <FilterTag tagSlug={value.slug} tagName={value.name} tagFilter={tagFilter}
-                           setTagFilter={setTagFilter}/></div>)}
 
 
         </div>
