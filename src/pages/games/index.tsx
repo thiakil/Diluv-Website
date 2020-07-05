@@ -88,9 +88,9 @@ export default function GameIndex({ theme, games, sorts, currentSort, search }: 
                             </div>
                         </div>
                     </div>
-                    <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 my-4`} id={`gameContainer`}>
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4`} id={`gameContainer`}>
                         {games.map(game => {
-                            return <div key={game.slug}>
+                            return <div key={game.slug} className="featured-game-card">
                                 <Link href={`/games/[GameSlug]/[ProjectType]`} as={`/games/${game.slug}/${game.defaultProjectType}`}>
 
                                     <a>
@@ -100,6 +100,7 @@ export default function GameIndex({ theme, games, sorts, currentSort, search }: 
                                             <source srcSet={game.logoURL.fallback.src} type={game.logoURL.fallback.type}/>
                                             <img src={game.logoURL.fallback.src} className={`w-full`}/>
                                         </picture>
+                                        <span>{game.name}</span>
                                     </a>
 
                                 </Link>

@@ -406,3 +406,23 @@
 .markdown blockquote > p {
   @apply mb-0;
 }
+
+.featured-game-card {
+  position: relative;
+}
+
+.featured-game-card span {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  color: white;
+  padding: .5rem;
+  transition: opacity ease-in-out .5s;
+}
+
+.featured-game-card:hover span {
+  opacity: 1;
+}

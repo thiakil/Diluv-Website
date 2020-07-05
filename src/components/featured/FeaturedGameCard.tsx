@@ -3,7 +3,7 @@ import { Game } from "../../interfaces";
 import Link from "next/link";
 
 function FeaturedGameCard({ game }: { game: Game }) {
-    return <div className={``}>
+    return <div className={`featured-game-card`}>
         <Link href={`/games/[GameSlug]/[ProjectType]`} as={`/games/${game.slug}/${game.defaultProjectType}`}>
 
             <a>
@@ -13,6 +13,7 @@ function FeaturedGameCard({ game }: { game: Game }) {
                     <source srcSet={game.logoURL.fallback.src} type={game.logoURL.fallback.type}/>
                     <img src={game.logoURL.fallback.src} className={`w-full mx-auto`}/>
                 </picture>
+                <span>{game.name}</span>
             </a>
 
         </Link>
